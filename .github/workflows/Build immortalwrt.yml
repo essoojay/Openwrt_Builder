@@ -33,7 +33,7 @@ env:
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: true
   UPLOAD_RELEASE: true
-  TZ: Asia/Shanghai
+  TZ: Europe/London
   TAG: v23.05.2
 
 jobs:
@@ -99,8 +99,8 @@ jobs:
       run: |
         cd openwrt
         make download -j8
-        find dl -size -1024c -exec ls -l {} \;
-        find dl -size -1024c -exec rm -f {} \;
+        find dl -size -2048c -exec ls -l {} \;
+        find dl -size -2048c -exec rm -f {} \;
 
     - name: Compile the firmware
       id: compile
