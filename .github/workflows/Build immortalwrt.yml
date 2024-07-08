@@ -46,7 +46,7 @@ jobs:
 
     - name: Initialization environment
       env:
-        DEBIAN_FRONTEND: interactive
+        DEBIAN_FRONTEND: noninteractive
       run: |
         sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
         sudo -E apt-get -qq update
@@ -86,7 +86,6 @@ jobs:
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
         make defconfig
-        make menuconfig
         
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
@@ -108,7 +107,7 @@ jobs:
       run: |
         cd openwrt
         echo -e "$(nproc) thread compile"
-        echo "y" | make -j$(expr $(nproc) + 1) || echo "y" | make -j1 V=s
+        eho "y" | make -j$(expr $(nproc) + 1) || echo "y" | make -j1 V=s
         echo "::set-output name=status::success"
         grep '^CONFIG_TARGET.*DEVICE.*=y' .config | sed -r 's/.*DEVICE_(.*)=y/\1/' > DEVICE_NAME
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
