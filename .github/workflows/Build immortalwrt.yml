@@ -199,6 +199,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
-        - name: Setup tmate session
+   - name: Setup tmate session
       if: success() || failure()
       uses: mxschmitt/action-tmate@v3
